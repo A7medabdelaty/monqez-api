@@ -10,6 +10,8 @@ from typing import List
 from schema import User as userSchema
 import uvicorn
 
+import Model.baseModel as Model
+
 app = FastAPI()
 
 
@@ -38,13 +40,13 @@ class Image(BaseModel):
 
 @app.post("/getUser", response_model=userSchema)
 async def generate_random_number(image: Image, db: Session = Depends(get_db)):
-    # Decode base64-encoded image data
-    img_data = base64.b64decode(image.data)
-
-    # Process image here (e.g. using OpenCV or Pillow)
-    # ...
+    
+    model = Model.mymodel(image.data)
+    person_id = model.prediction()
+    print(person_id)
 
     rand_num = random.randint(1, 1000)
+
     user = db.query(User).filter(User.id == rand_num).first()
     return user
 
