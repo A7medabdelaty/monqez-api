@@ -1,7 +1,7 @@
 # import libraries
 import numpy as np
 from keras.utils import load_img, img_to_array
-from tensorflow.keras.models import model_from_json
+from keras.models import model_from_json
 import pickle
 import base64
 from io import BytesIO

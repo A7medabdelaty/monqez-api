@@ -1,18 +1,17 @@
-import base64
 from pydantic import BaseModel
 import random
 from typing import List
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Response
 from sqlalchemy.orm import Session
 from database import SessionLocal
 from models import User
 from typing import List
 from schema import User as userSchema
 import uvicorn
-
 import Model.baseModel as Model
 
 app = FastAPI()
+
 
 
 def get_db():
@@ -40,7 +39,7 @@ class Image(BaseModel):
 
 @app.post("/getUser", response_model=userSchema)
 async def generate_random_number(image: Image, db: Session = Depends(get_db)):
-    
+
     model = Model.mymodel(image.data)
     person_id = model.prediction()
     print(person_id)
@@ -48,8 +47,8 @@ async def generate_random_number(image: Image, db: Session = Depends(get_db)):
     rand_num = random.randint(1, 1000)
 
     user = db.query(User).filter(User.id == rand_num).first()
-    return user
 
+    return user
 if __name__ == '__main__':
     uvicorn.run("app:app", reload=True)
 
