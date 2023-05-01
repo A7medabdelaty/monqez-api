@@ -5,7 +5,6 @@ from keras.models import model_from_json
 import pickle
 import base64
 from io import BytesIO
-from PIL import Image
 import numpy as np
 
 
