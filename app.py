@@ -77,6 +77,7 @@ def update_user(user_id: int, user: userSchema, db: Session = Depends(get_db)):
         db_user = db.query(User).filter(User.id == user_id).first()
         if not db_user:
             raise HTTPException(status_code=404, detail="User not found")
+        db_user.id = user_id
         update_user_db(db_user, user)
         db.commit()
         return {"message": "User updated successfully"}
@@ -95,20 +96,14 @@ def generate_random_number(user_id: int, db: Session = Depends(get_db)):
 
 @app.post("/getUser", response_model=userSchema)
 async def generate_random_number(image: Image, db: Session = Depends(get_db)):
-
     model = Model.mymodel(image.data)
     person_id = model.prediction()
     print(person_id)
-
-    rand_num = random.randint(1, 1000)
-
-    user = db.query(User).filter(User.id == rand_num).first()
-
+    user = db.query(User).filter(User.id == person_id).first()
     return user
 
 
 def update_user_db(db_user: User, user: userSchema) -> User:
-    db_user.id = user.id
     db_user.first_name = user.first_name
     db_user.last_name = user.last_name
     db_user.age = user.age
