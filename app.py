@@ -89,13 +89,13 @@ def update_user(user_id: int, user: userSchema, db: Session = Depends(get_db)):
 
 
 @app.get("/getUser/{user_id}", response_model=userSchema)
-def generate_random_number(user_id: int, db: Session = Depends(get_db)):
+def get_user_by_id(user_id: int, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.id == user_id).first()
     return user
 
 
 @app.post("/getUser", response_model=userSchema)
-async def generate_random_number(image: Image, db: Session = Depends(get_db)):
+async def get_user_by_image(image: Image, db: Session = Depends(get_db)):
     model = Model.mymodel(image.data)
     person_id = model.prediction()
     print(person_id)
