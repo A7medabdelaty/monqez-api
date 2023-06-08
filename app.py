@@ -133,7 +133,5 @@ def update_user_db(db_user: User, user: userSchema) -> User:
 if __name__ == '__main__':
     uvicorn.run("app:app", reload=True)
 
-
-# python3 -m venv .
 # .\scripts\activate
 # uvicorn app:app --reload
