@@ -7,7 +7,7 @@ from sqlalchemy.orm import sessionmaker
 # engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 engine = create_engine(
-    'postgresql+psycopg2://ahmedabdelaty:knHIvV8RFhueOuuD8cWFvmA8WWCpFfEY@dpg-cgrgmijk9u56e3n08qq0-a.oregon-postgres.render.com:5432/monqez_db')
+    'postgresql+psycopg2://ahmedabdelaty:VCaT1U2ltWTSduBGIXR2cw3y5kCVxg0I@dpg-cik1rr5ph6euh7j98kn0-a.oregon-postgres.render.com:5432/monqez_5qgl')
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
